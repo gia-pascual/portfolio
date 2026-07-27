@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #FBFAF6;
+  color: #16202E;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Signature element: the ledger rule — a hairline divider with a small
+   tabular-mono label, styled after a statement/ledger line item. Used
+   throughout the site wherever a section needs to be introduced. */
+.ledger-rule {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #93733A;
+}
+.ledger-rule::after {
+  content: "";
+  flex: 1 1 auto;
+  height: 1px;
+  background: linear-gradient(to right, rgba(147, 115, 58, 0.55), rgba(147, 115, 58, 0));
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Keyboard focus visibility */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #B08D45;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
