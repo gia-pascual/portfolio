@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #FCFBF7;
+  color: #141D2B;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Signature element: the ledger rule — a hairline divider with a small
+   tabular-mono label, styled after a statement/ledger line item. Used
+   as the section eyebrow throughout the site. */
+.ledger-rule {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #8F6E32;
+}
+.ledger-rule::after {
+  content: "";
+  flex: 1 1 auto;
+  height: 1px;
+  background: linear-gradient(to right, rgba(143, 110, 50, 0.55), rgba(143, 110, 50, 0));
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* A soft lift on hover for cards, used sparingly to signal interactivity
+   without resorting to flashy motion. */
+.card-lift {
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 220ms cubic-bezier(0.22, 1, 0.36, 1), border-color 220ms ease;
+}
+.card-lift:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 2px 4px rgba(10, 21, 41, 0.08), 0 20px 40px -18px rgba(10, 21, 41, 0.28);
+}
+@media (prefers-reduced-motion: reduce) {
+  .card-lift:hover { transform: none; }
+}
+
+/* Keyboard focus visibility */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #B38D46;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
