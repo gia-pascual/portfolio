@@ -1,174 +1,243 @@
+import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import Container from "@/components/Container";
-import Button from "@/components/Button";
-import LedgerRule from "@/components/LedgerRule";
 import SectionHeading from "@/components/SectionHeading";
-import ServiceCard from "@/components/ServiceCard";
-import PortfolioCard from "@/components/PortfolioCard";
-import { services, portfolioItems, certifications, site } from "@/lib/data";
+import LedgerRule from "@/components/LedgerRule";
+import Button from "@/components/Button";
+import TimelineItem from "@/components/TimelineItem";
+import { internshipTimeline, technicalSkills, taxSoftware, site } from "@/lib/data";
 
-export default function Home() {
-  const featured = portfolioItems.slice(0, 3);
+export const metadata: Metadata = {
+  title: "About",
+  description:
+    "Management Accounting graduate with accounting support experience, QuickBooks Online expertise, and ongoing US bookkeeping and tax preparation training.",
+};
 
+const experience = [
+  {
+    role: "Billing & Project Coordinator (Remote)",
+    org: "Electrical Contracting & Wiring Installation Company · Brooklyn, NYC",
+    period: "September 2025 – Present",
+    bullets: [
+      "Assisted in setting up the company's QuickBooks Online account, including company settings, the Chart of Accounts, Products & Services, and customer records.",
+      "Prepared detailed project estimates based on construction floor plans and project specifications.",
+      "Prepared customer invoices and maintained accurate billing documentation.",
+      "Monitored contractor work hours, labor costs, and project progress to support project tracking and management reporting.",
+      "Tracked tenant rent payments using Rent Manager property management software.",
+      "Maintained organized project documentation, billing records, and administrative reports.",
+    ],
+  },
+  {
+    role: "Accounting Support | Junior Bookkeeper",
+    org: "Aderans Philippines Inc. · Microsoft Dynamics 365 Business Central",
+    period: "January 2024 – January 2025",
+    bullets: [
+      "Managed petty cash transactions, replenishments, and expense reporting in compliance with company policies.",
+      "Processed accounts receivable transactions, monitored collections, and maintained accurate financial records.",
+      "Assisted in preparing invoices and reconciling customer accounts.",
+      "Encoded accounting transactions using Microsoft Dynamics 365 Business Central.",
+      "Assisted with payroll preparation, inventory audits, and financial reporting.",
+    ],
+  },
+  {
+    role: "Administrative and Public Assistance Intern",
+    org: "Office of the City Mayor · Philippines",
+    period: "August 2023 – November 2023",
+    bullets: [
+      "Assisted residents with government health and financial assistance requests, coordinating concerns with relevant government personnel.",
+      "Supported document processing, records management, and administrative operations.",
+    ],
+  },
+  {
+    role: "Administrative and HR Intern",
+    org: "Bureau of Internal Revenue (BIR) · Philippines",
+    period: "July 2022 – October 2022",
+    bullets: [
+      "Organized and maintained confidential employee records and HR documents.",
+      "Assisted HR personnel with document submissions, filing, and administrative requirements.",
+    ],
+  },
+];
+
+export default function AboutPage() {
   return (
     <>
-      {/* HERO — styled as a statement header: ledger-lined background, */}
-      {/* mono meta line standing in for a statement's reference row. */}
-      <section className="relative overflow-hidden border-b border-stone-200 bg-navy-950">
-        <div className="absolute inset-0 bg-ledger-lines opacity-40" aria-hidden="true" />
-        <Container className="relative py-20 md:py-28">
-          <div className="grid items-center gap-14 md:grid-cols-[1.15fr_0.85fr]">
-            <div>
-              <div className="ledger-rule mb-6 max-w-md">
-                <span className="font-mono text-xs uppercase tracking-[0.22em] text-gold-300 whitespace-nowrap">
-                  Statement of Services · {new Date().getFullYear()}
-                </span>
-              </div>
-              <h1 className="font-display text-hero text-paper-50">
-                {site.name}
-              </h1>
-              <p className="mt-5 font-mono text-sm uppercase tracking-wide text-gold-300 md:text-base">
-                {site.title}
-              </p>
-              <p className="mt-6 max-w-xl text-lg leading-relaxed text-paper-50/75">
-                {site.headline}
-              </p>
-
-              <div className="mt-9 flex flex-wrap gap-4">
-                <Button href={site.resumeHref} variant="primary" external className="!bg-gold-500 !border-gold-500 !text-navy-950 hover:!bg-gold-400">
-                  Download CV
-                </Button>
-                <Button href="/portfolio" variant="secondary" className="!border-paper-50/30 !text-paper-50 hover:!bg-paper-50/10 hover:!border-paper-50">
-                  View Portfolio
-                </Button>
-                <Button href={site.calendly} variant="ghost" external className="!border-paper-50/30 !text-gold-300 hover:!bg-paper-50/10">
-                  Book a Call
-                </Button>
-              </div>
-            </div>
-
-            <div className="relative mx-auto w-full max-w-xs md:max-w-sm">
-              <div className="absolute -inset-4 border border-gold-400/25" aria-hidden="true" />
-              <div className="relative aspect-[4/5] w-full overflow-hidden border border-paper-50/10 bg-navy-900 shadow-lift">
-                <Image
-                  src="/images/profile.jpg"
-                  alt={`${site.name}, ${site.title}`}
-                  fill
-                  priority
-                  className="object-cover object-top"
-                  sizes="(min-width: 768px) 384px, 320px"
-                />
-              </div>
-            </div>
-          </div>
-        </Container>
-      </section>
-
-      {/* ABOUT PREVIEW */}
-      <section className="py-20 md:py-28">
+      <section className="border-b border-stone-200 bg-stone-100/60 py-16 md:py-20">
         <Container>
-          <div className="grid gap-12 md:grid-cols-2">
+          <div className="grid gap-12 md:grid-cols-[1fr_auto] md:items-center">
             <SectionHeading
-              eyebrow="About"
-              title="A process-driven approach to remote accounting support"
-              description="A Management Accounting graduate with hands-on experience in accounting support, QuickBooks Online, and Microsoft Dynamics 365 Business Central — currently completing structured training in US bookkeeping and tax preparation."
+              eyebrow="Professional Profile"
+              title="Detail-oriented support for U.S. bookkeeping and tax workflows"
+              description="An accounting professional supporting U.S.-based business operations through billing coordination, project documentation, financial record management, and QuickBooks Online support — while completing structured training in U.S. tax preparation."
             />
-            <div className="flex flex-col justify-between gap-6">
-              <p className="text-base leading-relaxed text-ink-500">
-                Every engagement is approached the same way: organize the records first,
-                document the workflow, then support accurate reporting. That discipline comes
-                from corporate accounting experience and continues through ongoing US
-                bookkeeping and tax preparation training.
-              </p>
-              <Link
-                href="/about"
-                className="inline-flex w-fit items-center gap-2 text-sm font-medium text-navy-900 hover:text-gold-600"
-              >
-                Read the full profile <span aria-hidden="true">→</span>
-              </Link>
+            <div className="relative mx-auto h-40 w-40 flex-shrink-0 overflow-hidden border border-stone-200 shadow-card md:h-48 md:w-48">
+              <Image
+                src="/images/profile.jpg"
+                alt={site.name}
+                fill
+                className="object-cover object-top"
+                sizes="192px"
+              />
             </div>
           </div>
         </Container>
       </section>
 
-      {/* SERVICES */}
-      <section className="border-y border-stone-200 bg-stone-100/60 py-20 md:py-28">
+      <section className="py-16 md:py-20">
+        <Container className="max-w-3xl">
+          <div className="space-y-5 text-base leading-relaxed text-ink-700">
+            <p>
+              In my current role as a Billing &amp; Project Coordinator for a U.S. electrical
+              contracting company, I assist with QuickBooks Online company setup, customer
+              records, estimates, invoicing, billing documentation, labor cost monitoring, and
+              project tracking.
+            </p>
+            <p>
+              I have also completed QuickBooks Online bookkeeping training, developing practical
+              experience across the full bookkeeping cycle in a case study environment: company
+              setup, Chart of Accounts organization, customer and vendor management, invoicing
+              and billing, accounts receivable and accounts payable monitoring, bank
+              reconciliation, and financial reporting.
+            </p>
+            <p>
+              With a Bachelor&apos;s degree in Management Accounting and prior corporate accounting
+              experience using Microsoft Dynamics 365 Business Central, I combine accounting
+              fundamentals with hands-on remote operations experience. I am currently expanding
+              into U.S. tax preparation through a structured internship covering individual and
+              business taxation (Forms 1040, 1065, and 1120-S), working in CCH Tax, Drake Tax,
+              and Intuit ProConnect Tax under professional guidance.
+            </p>
+            <p>
+              My goal is to provide accurate, organized, and reliable accounting support to U.S.
+              businesses and accounting firms — applying attention to detail, continuous
+              learning, and a process-driven approach to every engagement.
+            </p>
+          </div>
+
+          <div className="mt-10 border-t border-stone-200 pt-8">
+            <LedgerRule label="Education" />
+            <p className="font-display text-lg text-navy-900">
+              Bachelor of Science in Management Accounting
+            </p>
+            <p className="mt-1 text-sm text-ink-500">
+              University of Pangasinan · Dagupan City, Philippines · 2023
+            </p>
+          </div>
+        </Container>
+      </section>
+
+      <section className="border-y border-stone-200 bg-stone-100/60 py-16 md:py-20">
+        <Container>
+          <SectionHeading eyebrow="Experience" title="Professional experience" />
+          <div className="mt-12 grid gap-10 lg:grid-cols-2">
+            {experience.map((job) => (
+              <div key={job.role} className="card-lift border border-stone-200 bg-white p-7">
+                <div className="flex flex-wrap items-baseline justify-between gap-2">
+                  <h3 className="font-display text-lg text-navy-900">{job.role}</h3>
+                  <span className="font-mono text-xs tabular text-gold-600">{job.period}</span>
+                </div>
+                <p className="mt-1 text-sm text-ink-500">{job.org}</p>
+                <ul className="mt-5 flex flex-col gap-3 border-t border-stone-100 pt-5">
+                  {job.bullets.map((bullet) => (
+                    <li key={bullet} className="flex items-start gap-2 text-sm text-ink-700">
+                      <span className="mt-2 h-1 w-1 flex-shrink-0 rounded-full bg-gold-500" />
+                      {bullet}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      <section className="py-16 md:py-20">
         <Container>
           <SectionHeading
-            eyebrow="Services"
-            title="Support built around the bookkeeping cycle"
-            description="From setting up the books to organizing the data behind a tax return, each service is scoped as support work under appropriate professional guidance."
+            eyebrow="Internship"
+            title="Bookkeeping & U.S. Tax Preparation Internship"
+            description="Borderless Accountant · January 2026 – Present"
           />
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {services.map((service) => (
-              <ServiceCard key={service.code} service={service} />
+          <div className="mt-12 max-w-2xl">
+            {internshipTimeline.map((entry, index) => (
+              <TimelineItem
+                key={entry.title}
+                entry={entry}
+                isLast={index === internshipTimeline.length - 1}
+              />
             ))}
           </div>
         </Container>
       </section>
 
-      {/* PORTFOLIO PREVIEW */}
-      <section className="py-20 md:py-28">
+      <section className="border-y border-stone-200 bg-stone-100/60 py-16 md:py-20">
         <Container>
-          <div className="flex flex-wrap items-end justify-between gap-6">
-            <SectionHeading
-              eyebrow="Portfolio"
-              title="Case studies from training and practical work"
-              description="Bookkeeping and US tax preparation work are kept in clearly separated sections on the full portfolio page."
-            />
-            <Link
-              href="/portfolio"
-              className="inline-flex items-center gap-2 text-sm font-medium text-navy-900 hover:text-gold-600"
-            >
-              View all case studies <span aria-hidden="true">→</span>
-            </Link>
-          </div>
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {featured.map((item) => (
-              <PortfolioCard key={item.slug} item={item} />
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      {/* CERTIFICATIONS STRIP */}
-      <section className="border-y border-stone-200 bg-navy-950 py-16">
-        <Container>
-          <LedgerRule label="Certifications on file" />
-          <div className="mt-8 flex flex-wrap gap-x-10 gap-y-4">
-            {certifications.map((cert) => (
-              <div key={cert.title} className="flex items-baseline gap-3">
-                <span className="font-mono text-xs tabular text-gold-300/70">{cert.year}</span>
-                <span className="text-sm text-paper-50/80">{cert.title}</span>
+          <SectionHeading
+            eyebrow="Tax Software"
+            title="U.S. tax preparation platforms"
+            description="Professional tax software used during training and internship, always under professional guidance."
+          />
+          <div className="mt-10 grid gap-6 md:grid-cols-3">
+            {taxSoftware.map((tool) => (
+              <div key={tool.name} className="card-lift border border-stone-200 border-t-2 border-t-gold-500 bg-white p-6">
+                <h3 className="font-display text-lg text-navy-900">{tool.name}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-ink-500">{tool.detail}</p>
               </div>
             ))}
           </div>
-          <Link
-            href="/certifications"
-            className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-gold-300 hover:text-gold-400"
-          >
-            View certificates <span aria-hidden="true">→</span>
-          </Link>
+
+          <div className="mt-16">
+            <SectionHeading eyebrow="Technical Skills" title="Software & tools" />
+          </div>
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {technicalSkills.map((group) => (
+              <div key={group.category} className="card-lift border border-stone-200 bg-white p-6">
+                <h3 className="font-mono text-xs uppercase tracking-wider text-gold-600">
+                  {group.category}
+                </h3>
+                <ul className="mt-4 flex flex-col gap-2">
+                  {group.items.map((item) => (
+                    <li key={item} className="text-sm text-ink-700">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
         </Container>
       </section>
 
-      {/* CTA */}
-      <section className="py-20 md:py-28">
-        <Container className="text-center">
-          <h2 className="font-display text-display-lg text-navy-900">
-            Looking for reliable remote bookkeeping support?
-          </h2>
-          <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-ink-500">
-            Let&apos;s talk about your firm&apos;s bookkeeping or tax data organization needs.
-          </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <Button href={site.calendly} variant="primary" external>
-              Book a Call
-            </Button>
-            <Button href="/contact" variant="secondary">
-              Send a Message
-            </Button>
+      <section className="py-16 md:py-20">
+        <Container>
+          <div className="grid gap-10 border border-stone-200 bg-white p-8 shadow-card md:grid-cols-2 md:p-10">
+            <div>
+              <LedgerRule label="Remote Work Readiness" />
+              <dl className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-3 text-sm">
+                <dt className="text-ink-500">Internet</dt>
+                <dd className="text-ink-900">Globe Fiber 100 Mbps · Backup: Smart 5G hotspot</dd>
+                <dt className="text-ink-500">Equipment</dt>
+                <dd className="text-ink-900">Asus TUF Gaming Laptop · Dual monitors · Noise-cancelling headset</dd>
+                <dt className="text-ink-500">Workspace</dt>
+                <dd className="text-ink-900">Dedicated home office</dd>
+                <dt className="text-ink-500">Availability</dt>
+                <dd className="text-ink-900">Full-time · Flexible across U.S. (EST/CST) time zones</dd>
+              </dl>
+            </div>
+            <div className="flex flex-col justify-between gap-6">
+              <p className="text-sm leading-relaxed text-ink-500">
+                Fluent in English, with a workspace and schedule built around consistent
+                availability for U.S.-based accounting firms and businesses.
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <Button href={site.resumeHref} variant="primary" external>
+                  Download CV
+                </Button>
+                <Button href="/contact" variant="secondary">
+                  Get in Touch
+                </Button>
+              </div>
+            </div>
           </div>
         </Container>
       </section>
